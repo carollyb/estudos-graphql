@@ -36,9 +36,31 @@ scalar DateTime
     }
 
     type Mutation {
-        adicionaUser(user: UserInput): User!
-        atualizaUser(id: ID!, user: UserInput): User!
-        deletaUser(id: ID!): ID!
+        adicionaUser(user: UserInput): adicionaUserResposta!
+        atualizaUser(id: ID!, user: UserInput): atualizaUserResposta!
+        deletaUser(id: ID!): deletaUserResposta!
+    }
+
+    interface respostaCustom {
+        code: String!
+        mensagem: String!
+    }
+
+    type deletaUserResposta implements respostaCustom {
+        code: String!
+        mensagem: String! 
+    }
+
+    type adicionaUserResposta implements respostaCustom {
+        code: String!
+        mensagem: String!
+        user: User!
+    }
+
+    type atualizaUserResposta implements respostaCustom {
+        code: String!
+        mensagem: String!
+        user: User!
     }
 `
 module.exports = userSchema
